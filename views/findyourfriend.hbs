@@ -1,0 +1,88 @@
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-6 col-sm-6 bg-light p-5">
+            <br>
+            <h3>Find Your Friends!</h3>
+            <input type="text" name="search" class="form-control" id="search" placeholder="Registration Number" onkeyup="searchPeople()">
+
+<br>
+<h4>Search Results</h4>
+            <div style="overflow-y: auto; height: 250px;">
+                        
+                <div id="searchresults">
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 bg-light">
+   
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5" id="roomd">
+                    <h5 class="display-5 fw-bold">Room details will be displayed here.</h5>
+                </div>
+            </div>
+     
+        </div>
+    </div>
+    
+
+
+
+</div>
+
+<script>
+    var getDetails = function(x) {
+        const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && (this.status == 200 || this.status == 304)) {
+                    result = JSON.parse(this.responseText);
+                    var html = `
+                        <h3 class="display-3 fw-bold" style="color: green;">`+ result.block + ` Block</h3>
+                    <br>
+                    <br>
+                    <h6 class="display-6 fw-bold">Room Number</h6>
+                    <h3 class="display-3 fw-bold" style="color: green;">`+ result.roomno + `</h3>
+                        `;
+                    document.getElementById("roomd").innerHTML = html;
+                }
+            };
+            xhttp.open("GET", "/rooms/getdetails/" + x);
+            xhttp.send();
+    }
+
+    var searchPeople = function () {
+        var q = $("#search").val();
+        if (q == "") {
+            document.getElementById("searchresults").innerHTML = "";
+            document.getElementById("searchresults").style.display = "none";
+            document.getElementById("roomd").innerHTML = `<h5 class="display-5 fw-bold">Room details will be displayed here.</h5>`;
+        }
+        if (q != "") {
+            document.getElementById("searchresults").style.display = "initial";
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && (this.status == 200 || this.status == 304)) {
+                    result = JSON.parse(this.responseText);
+                    var html = `
+                        
+                        `;
+                    for (var i = 0; i < result.length; i++) {
+                        html += `
+                            <a href="#" class="list-group-item" onclick="getDetails('` + result[i]._id + `')">
+                                <div class="media">
+                                    <h6 class="mb-0">` + result[i].name + ` (` + result[i].regNum + `)</h6>
+                                </div>
+                            </a>`;
+                    }
+                    document.getElementById("searchresults").innerHTML = html;
+                }
+            };
+            xhttp.open("GET", "/rooms/search/" + q);
+            xhttp.send();
+        }
+    }
+</script>

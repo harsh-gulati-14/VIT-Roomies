@@ -1,0 +1,174 @@
+<main>
+  <div class="container marketing" style="margin-top: 3%;">
+    <p class="display-1" style="text-align: center; margin-bottom:2%; font-weight:700">Room : {{bl}} -
+      {{user.roomno}}</p>
+    {{!-- <div class="row">
+      <div class="col-lg-6 col-md-4 col-sm-4" align="right">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          WhatsApp Group
+        </button>
+      </div>
+      <div class="col-lg-6 col-md-4 col-sm-4">
+        <button type="button" class="btn btn-success">
+          Download Contacts
+        </button>
+      </div>
+    </div> --}}
+    <table align="center">
+      <tr>
+        <td align="right" style="padding-right: 10px;">
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            WhatsApp Group
+          </button>
+        </td>
+        <td align="left">
+          <a href="/rooms/download"><button type="submit" class="btn btn-primary">
+             Download Contacts
+          </button></a>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">WhatsApp Group Link</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {{#if wa}}
+            <form method="POST" action="/rooms/edit">
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">WhatsApp Link : </label>
+                <input type="text" class="form-control" value="{{wa}}" name="link" id="recipient-name">
+              </div>
+              {{else}}
+              <form method="POST" action="/rooms/edit">
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">WhatsApp Link : </label>
+                  <input type="text" class="form-control" name="link" id="recipient-name">
+                </div>
+                {{/if}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      {{#each data}}
+      <div class="col-lg-4">
+        <img src="https://ui-avatars.com/api/?rounded=true&name={{this.name}}" height="140" width="140">
+
+        <h2>{{this.name}}</h2>
+
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#m{{this._id}}">
+          View Details &raquo;
+        </button>
+
+        <div class="modal fade" id="m{{this._id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">User Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <table>
+                  <tr>
+                    <td style="font-weight: bolder; text-align:left; padding-right: 10px">Name : </td>
+                    <td style="text-align: left;">{{this.name}}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bolder; text-align:left; padding-right: 10px">Reg. No : </td>
+                    <td style="text-align: left;">{{this.regNum}}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bolder; text-align:left; padding-right: 10px">Contact : </td>
+                    <td style="text-align: left;">{{this.phoneNum}}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bolder; text-align:left; padding-right: 10px">Email : </td>
+                    <td style="text-align: left;">{{this.email}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <br>
+    <br>
+    <br>
+  </div>
+
+  {{#if show}}
+  <div class="modal fade" id="show" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-6 shadow">
+        <div class="modal-body p-5">
+          <h2 class="fw-bold mb-0">What's new</h2>
+
+          <ul class="d-grid gap-4 my-5 list-unstyled">
+            <li class="d-flex gap-4">
+              <img src="/images/friends.png" width="48" height="48">
+              <div>
+                <h5 class="mb-0">Find Your Roommates!</h5>
+                Get your roommates details, form a whatsapp group, get email updates on new members! &#128521;
+              </div>
+            </li>
+            <li class="d-flex gap-4">
+              <img src="/images/search.jpeg" width="48" height="48">
+              <div>
+                <h5 class="mb-0">Search for your friends!</h5>
+                Though the hostel allocation was random, you can still find your friend rooms. (Sad &#128546;)
+              </div>
+            </li>
+            <li class="d-flex gap-4">
+              <img src="/images/maps.png" width="48" height="48">
+              <div>
+                <h5 class="mb-0">Know your hostel location and essentials</h5>
+                Have a look at your hostel and how far it is from SJT! We also provide you with a "hostel essentials"
+                list. &#128567;
+              </div>
+            </li>
+          </ul>
+          <button type="button" onclick="updateFlag()" class="btn btn-lg btn-primary mt-5 w-100"
+            data-bs-dismiss="modal">Great,
+            thanks!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+    $(window).on('load', function () {
+      $('#show').modal('show');
+    });
+
+    var updateFlag = function () {
+      const xhttp = new XMLHttpRequest();
+
+      xhttp.open("GET", "/users/updateflag");
+      xhttp.send();
+    }
+  </script>
+  {{/if}}
+
+
+</main>

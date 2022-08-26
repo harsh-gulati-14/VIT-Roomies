@@ -1,0 +1,37 @@
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-lg-5 py-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 mb-3">Enter your details</h1>
+        <p class="col-lg-10 fs-4">Find Your Roommates and friends' rooms.</p>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-5">
+        <form class="p-4 p-md-5 border rounded-3 bg-light" action="/users/register" method="POST" id="myform">
+          
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="regnum" required name="regNum" placeholder="19BXXXXXX" pattern="^[0-9]{2}[A-Za-z]{3}[0-9]{4}">
+            <label for="regnum">Reg. Number</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingNumber" required name="phoneNum" placeholder="Phone Number">
+            <label for="floatingNumber">Phone No.</label>
+          </div>
+          <p style="font-size:20px;"><b>Gender:</b></p>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="M">
+            <label class="form-check-label" for="flexRadioDefault1" style="font-size:16px;">
+              Male
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="F" checked>
+            <label class="form-check-label" for="flexRadioDefault2" style="font-size:16px;">
+              Female
+            </label>
+          </div>
+          <br>
+          <button class="w-100 btn btn-lg btn-primary" id="subBTN"  type="submit">Submit</button>
+          <hr class="my-4">
+        </form>
+      </div>
+    </div>
+  </div>
